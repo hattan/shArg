@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+    
+      - name: Install shellspec
+        run: curl -fsSL https://git.io/shellspec | sh
+
+      - name: Run Tests
+        run: |
+          shellspec -f d
