@@ -62,3 +62,11 @@ shArgs.arg is the method used to register commnd line parameters or flags.
 | long name | the long version command line flag and should start with two dashes | --messages
 |type| either PARAMETER (for inputs with values) or FLAG (for boolean inputs which do not require a value) | -d
 |auto export| either true or false . If true, then the key is exported to the global scope as a variable with the input value.| true
+
+## Running the tests
+
+* Install [ShellSpec](https://github.com/shellspec/shellspec#installation)
+  
+  ```curl -fsSL https://git.io/shellspec | sh```
+
+* Run Shellspec using the bash command ```shellspec -f d```

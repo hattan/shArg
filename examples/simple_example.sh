@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
-# ####
-# Run this script with
+# #########################################################
+# Navigate to the examples folder and invoke this file.
+# cd examples
 # ./simple_example.sh -m hello -d
-# ###
+# #########################################################
 
 # load shArg
-source shArg.sh
+source ../scripts/shArg.sh
 
 declare MESSAGE
 declare DEBUG

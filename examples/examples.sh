@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-# load shArg
-source shArg.sh
-
-# ####
+# #########################################################
 # registering an argument
 # shARgs.arg "<key: string>" "<short flag name: -string>" "<long flag name: --string>" "<type: PARAMETER | FLAG>" "<auto export: true | false"
 #
 # Run this script with
 # ./examples.sh -f 1234 -b -m 12123 -d aaa --coo bbb
-# ###
+# #########################################################
+
+# load shArg
+source ../scripts/shArg.sh
 
 # define a parmeter (input with value)
 shArgs.arg "MESSAGE" -m --message PARAMETER 

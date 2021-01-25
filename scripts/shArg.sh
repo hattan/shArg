@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
-declare -A _SH_ARGUMENTS
-declare -A _SH_SHORTS
-declare -A _SH_LONGS
-declare -A _SH_TYPES
-declare -A _SH_AUTOS
+declare -A _SH_ARGUMENTS=()
+declare -A _SH_SWITCHES=()
+declare -A _SH_TYPES=()
+declare -A _SH_AUTOS=()
 
 shArgs.arg(){   
     local variableName=$1
@@ -14,15 +13,17 @@ shArgs.arg(){
     local auto=$5
 
     if [ ! -z "$shortName" ]; then
-        _SH_SHORTS[$shortName]=$variableName
+        _SH_SWITCHES[$shortName]=$variableName
     fi
 
     if [ ! -z "$longName" ]; then
-        _SH_SHORTS[$longName]=$variableName
+        _SH_SWITCHES[$longName]=$variableName
     fi
 
     if [ ! -z "$argType" ]; then
         _SH_TYPES[$variableName]=$argType
+    else
+        _SH_TYPES[$variableName]="PARAMETER"
     fi
     
     if [ "$argType" == "FLAG" ]; then
@@ -46,10 +47,7 @@ shArgs.parse(){
     do
         case $1 in
             *)   
-                _varName=${_SH_LONGS[$1]}
-                if [ -z "$_varName" ]; then
-                    _varName=${_SH_SHORTS[$1]}
-                fi       
+                _varName=${_SH_SWITCHES[$1]}      
          
                 if [ ! -z "$_varName" ]; then
                     argType=${_SH_TYPES[$_varName]}
