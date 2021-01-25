@@ -7,9 +7,9 @@ argument parsing library for .sh files.
 * source shArg in your bash script.
   ```source shArg.sh```
 * Register arguments
-  ``` shArgs.arg "<key: string>" "<short flag name: -string>" "<long flag name: --string>" "<type: PARAMETER | FLAG>" "<auto export: true | false"
+  ```shArgs.arg "<key: string>" "<short flag name: -string>" "<long flag name: --string>" "<type: PARAMETER | FLAG>" "<auto export: true | false"```
 
-* call shArgs.parse $@
+* ```shArgs.parse $@```
 
  * If arguments are autoexported they will be accessible via global variables.
 *  If not autoexported (default) then you can explicility read the values using either of these mechanisms:
