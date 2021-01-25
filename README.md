@@ -1,5 +1,8 @@
+![CI](https://github.com/hattan/shArg/workflows/CI/badge.svg)
+
 # shArg
-argument parsing library for .sh files.
+argument parsing library for .sh files. 
+
 
 ## Simple Example:
 
