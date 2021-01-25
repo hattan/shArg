@@ -19,4 +19,4 @@ jobs:
 
       - name: Run Tests
         run: |
-          shellspec -f d
+           ~/.local/bin/shellspec -f d
