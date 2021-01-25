@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-# load shArg
-source shArg.sh
-
 # ####
 # Run this script with
 # ./simple_example.sh -m hello -d
 # ###
+
+# load shArg
+source shArg.sh
 
 declare MESSAGE
 declare DEBUG
