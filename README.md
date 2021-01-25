@@ -24,6 +24,10 @@ if [ "$DEBUG" == true ]; then
 else
   echo "DEBUG is false"
 fi
+
+# Run from the command line via
+# ./example.sh -m "TEST" -d
+# ./example.sh --message "hello" -d
 ```
 
 
