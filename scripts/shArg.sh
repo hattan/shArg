@@ -71,6 +71,7 @@ shArgs.parse(){
     done
 
 }
+
 shArgs.val(){
    echo ${_SH_ARGUMENTS[$1]}
 }

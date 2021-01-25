@@ -112,6 +112,11 @@ Describe 'shArg'
       The value "${_SH_ARGUMENTS['FILE']}" should equal "test1.txt"
     End
 
+    It 'should still set _SH_ARGUMENTS if auto export is true (#5)'
+      When call shArgs.parse --message "test123" -u bob --output table --file test1.txt -d
+      The value "${_SH_ARGUMENTS['FILE']}" should equal "test1.txt"
+    End
+
     It 'should set several values at once'
       When call shArgs.parse --message "abcd" -u picard --output json -f input.dat -d
       The value "${_SH_ARGUMENTS['MESSAGE']}" should equal "abcd"
@@ -121,5 +126,29 @@ Describe 'shArg'
       The value "${_SH_ARGUMENTS['FILE']}" should equal "input.dat"
       The value "$FILE" should equal "input.dat" 
     End
+  End 
+
+  Context "val helper method"
+    setup() { 
+      shArgs.arg "MESSAGE" -m --message PARAMETER  
+      shArgs.arg "DEBUG" -d --debug FLAG            
+      shArgs.arg "USER" -u                          
+      shArgs.arg "OUTPUT" --output                  
+      shArgs.arg "FILE" -f --file PARAMETER true    
+
+      shArgs.parse --message "efghij" -u picard --output json -f input.dat -d
+    }
+    BeforeEach 'setup'
+
+    It 'should return the correct value when shArg.val is called'
+      When call shArgs.val "MESSAGE"
+      The output should equal "efghij"
+    End
+
+    It 'should return empty string when an invalid key is passed to val'
+      When call shArgs.val "INVALID"
+      The output should equal ""
+    End
+
   End 
 End
