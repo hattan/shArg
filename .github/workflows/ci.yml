@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v2
     
       - name: Install shellspec
-        run: curl -fsSL https://git.io/shellspec | sh
+        run: curl -fsSL https://git.io/shellspec | sh -s -- --yes
 
       - name: Run Tests
         run: |
