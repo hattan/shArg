@@ -143,7 +143,12 @@ Describe 'shArg'
       When call shArgs.parse -l http://fake.com 
       The value "$URL_HOOK_VALUE" should equal "http://fake.com"
     End 
-    
+
+    It 'should not call a hook method when the bound argument is not passed in #7'
+      When call shArgs.parse --message "test123"
+      The value "$URL_HOOK_CALLED" should equal false
+    End 
+
   End 
 
   Context "val helper method"
