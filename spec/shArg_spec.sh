@@ -67,13 +67,20 @@ Describe 'shArg'
   End
 
   Context "Argument Parsing"
+    urlHook(){
+      URL_HOOK_CALLED=true
+      URL_HOOK_VALUE=$1
+    }
+
     setup() { 
       # argument registration used by the specs that follow.
-      shArgs.arg "MESSAGE" -m --message PARAMETER   #1
-      shArgs.arg "DEBUG" -d --debug FLAG            #2
-      shArgs.arg "USER" -u                          #3
-      shArgs.arg "OUTPUT" --output                  #4
-      shArgs.arg "FILE" -f --file PARAMETER true    #5
+      shArgs.arg "MESSAGE" -m --message PARAMETER       #1
+      shArgs.arg "DEBUG" -d --debug FLAG                #2
+      shArgs.arg "USER" -u                              #3
+      shArgs.arg "OUTPUT" --output                      #4
+      shArgs.arg "FILE" -f --file PARAMETER true        #5
+      shArgs.arg "URL" -l --url PARAMETER true urlHook  #6
+      URL_HOOK_CALLED=false
     }
     BeforeEach 'setup'
 
@@ -126,6 +133,17 @@ Describe 'shArg'
       The value "${_SH_ARGUMENTS['FILE']}" should equal "input.dat"
       The value "$FILE" should equal "input.dat" 
     End
+
+    It 'should call a hook method when a binding occurs #7'
+      When call shArgs.parse --message "test123" -u bob --output table --file test1.txt -l http://fake.com -d
+      The value "$URL_HOOK_CALLED" should equal true
+    End 
+
+    It 'should call a hook method with input parameter when a binding occurs #8'
+      When call shArgs.parse -l http://fake.com 
+      The value "$URL_HOOK_VALUE" should equal "http://fake.com"
+    End 
+    
   End 
 
   Context "val helper method"
