@@ -57,6 +57,67 @@ fi
     * using the _SH_ARGUMENTS array
       ``` echo "MESSAGE = ${_SH_ARGUMENTS["MESSAGE"]}" ```
 
+## Parameter Types
+
+shArg has two main input types; PARAMETER and FLAG. 
+
+* PARAMETER:
+
+  A parameter is defined as an input that has an associated value.
+
+  For example: 
+
+  ```shell
+  # arg
+  shArgs.arg "MESSAGE" -m --message PARAMETER true
+
+  # invoke with
+  ./myscript.sh --message "hello world"
+  ```
+
+  hello world is the value specified for the message parameter.
+
+  Parameters can be a single value or a comma separated value (csv.) You can pass a csv in and it will be automatically converted to a bash array.
+
+  ```shell
+  #arg 
+  shArgs.arg "IPS" -i --ips PARAMETER true 
+
+  # invoke with
+  ./list.sh -i 1.1.1.1,2.2.2.2
+  ```
+
+  ***Note:*** For csv inputs, please ensure that there is no space between elements and associated commas. This applies event with quotes inputs.
+
+  ```shell
+  # This will work
+  ./list.sh -i 1.1.1.1,2.2.2.2
+
+  # This will not work
+  ./list.sh -i 1.1.1.1, 2.2.2.2
+
+  # This will not work, even with quotes
+  ./list.sh -i "1.1.1.1, 2.2.2.2"
+  ```
+
+* FLAG:
+  shArg also supports FLAG, which is a boolean input that does not require a value.
+
+  For example: 
+
+  ```shell
+  # arg 
+  shArgs.arg "DEBUG" -d --debug FLAG true
+
+  # invoke with
+  ./myscript.sh --debug
+  ```
+
+  In this case including --debug when calling the script will set the DEBUG variable to true. Omitting it, sets DEBUG to false. There isn't a need to pass a value after debug.
+
+
+
+
 ## shArgs.arg reference
 shArgs.arg is the method used to register commnd line parameters or flags.
 
