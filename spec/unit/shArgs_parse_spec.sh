@@ -10,12 +10,14 @@ Describe 'shArg'
 
     setup() { 
       # argument registration used by the specs that follow.
-      shArgs.arg "MESSAGE" -m --message PARAMETER       #1
-      shArgs.arg "DEBUG" -d --debug FLAG                #2
-      shArgs.arg "USER" -u                              #3
-      shArgs.arg "OUTPUT" --output                      #4
-      shArgs.arg "FILE" -f --file PARAMETER true        #5
-      shArgs.arg "URL" -l --url PARAMETER true urlHook  #6
+      shArgs.arg "MESSAGE" -m --message PARAMETER                       #1
+      shArgs.arg "DEBUG" -d --debug FLAG                                #2
+      shArgs.arg "USER" -u                                              #3
+      shArgs.arg "OUTPUT" --output                                      #4
+      shArgs.arg "FILE" -f --file PARAMETER true                        #5
+      shArgs.arg "URL" -l --url PARAMETER true urlHook                  #6
+      shArgs.arg "NAME" -nm --name PARAMETER true                       #7
+      shArgs.arg "RESOURCE_GROUP" -rgp --resource-group PARAMETER true  #8
       URL_HOOK_CALLED=false
     }
     BeforeEach 'setup'
@@ -85,5 +87,14 @@ Describe 'shArg'
       The value "$URL_HOOK_CALLED" should equal false
     End 
 
+    It 'should allow short name with two characters #8'
+      When call shArgs.parse -nm "some name"
+      The value "$NAME" should equal "some name"
+    End 
+
+    It 'should allow short name with thre characters #9'
+      When call shArgs.parse -rgp "my-test-group"
+      The value "$RESOURCE_GROUP" should equal "my-test-group"
+    End     
   End 
 End
