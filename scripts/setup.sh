@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 declare SH_ARG_BASE=.sh_arg
 
 if [ ! -d $SH_ARG_BASE ]; then
