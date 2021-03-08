@@ -39,7 +39,7 @@ fi
   * Option 1) Copy [shArg.sh](scripts/shArg.sh) to your project. 
   * Option 2) Easy install - run the following from a bash shell 
   
-    `curl -L https://raw.githubusercontent.com/hattan/shArg/setup.sh | bash`
+    `curl -L https://raw.githubusercontent.com/hattan/shArg/main/scripts/setup.sh | bash`
 
     This creates a folder called .sh_arg and downloads shArg to the path .sh_arg/shArg.sh. You can include in your scripts via `source .sh_arg/shArgs.sh`
 

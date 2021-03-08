@@ -11,7 +11,7 @@ This guide will walk you through setting up a simple script to use shArg and hig
 
 ### Install shArg using the setup script
 
-* `curl -L https://raw.githubusercontent.com/hattan/shArg/setup.sh | bash`
+* `curl -L https://raw.githubusercontent.com/hattan/shArg/main/scripts/setup.sh | bash`
 
 ### Create a new example.sh file to test.
 
