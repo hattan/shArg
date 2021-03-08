@@ -33,10 +33,16 @@ fi
 # ./example.sh --message "hello" -d
 ```
 
-
 ## Getting Started
 
-* Copy shArg.sh to your project.
+* include shArg.sh in your project:
+  * Option 1) Copy [shArg.sh](scripts/shArg.sh) to your project. 
+  * Option 2) Easy install - run the following from a bash shell 
+  
+    `curl -L https://raw.githubusercontent.com/hattan/shArg/setup.sh | bash`
+
+    This creates a folder called .sh_arg and downloads shArg to the path .sh_arg/shArg.sh. You can include in your scripts via `source .sh_arg/shArgs.sh`
+
 * source shArg in your bash script.
   ```source shArg.sh```
 * Register arguments
@@ -46,16 +52,24 @@ fi
 
 * Parse inputs: ```shArgs.parse $@```
 
- * If arguments are autoexported they will be accessible via global variables.
-*  If not autoexported (default) then you can explicility read the values using either of these mechanisms:
+* If arguments are autoexported they will be accessible via global variables.
 
-    * using shArg.val
+* If not autoexported (default) then you can explicility read the values using either of these mechanisms:
+
+  * using shArg.val
 
       ``` declare message=`shArgs.val "MESSAGE"` ```
       ``` echo $message ```
 
-    * using the _SH_ARGUMENTS array
+  * using the _SH_ARGUMENTS array
       ``` echo "MESSAGE = ${_SH_ARGUMENTS["MESSAGE"]}" ```
+
+* Checkout the [guided walk through](GETTING_STARTED.md) on setting up shArg.
+
+## Simple walk through
+
+Please see the following [guided walk through](GETTING_STARTED.md) on setting up shArg.
+
 
 ## Parameter Types
 
