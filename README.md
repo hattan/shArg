@@ -33,11 +33,10 @@ fi
 # ./example.sh --message "hello" -d
 ```
 
-
 ## Getting Started
 
 * include shArg.sh in your project:
-  * Option 1) Copy [shArg.sh](scripts/shArg) to your project. 
+  * Option 1) Copy [shArg.sh](scripts/shArg.sh) to your project. 
   * Option 2) Easy install - run the following from a bash shell 
   
     `curl -L https://raw.githubusercontent.com/hattan/shArg/setup.sh | bash`
