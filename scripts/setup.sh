@@ -1,4 +1,4 @@
-declare SH_ARG_BASE=.sh_arg
+SH_ARG_BASE=.sh_arg
 
 if [ ! -d $SH_ARG_BASE ]; then
   mkdir .sh_arg
