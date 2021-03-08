@@ -150,7 +150,7 @@ shArgs.parse(){
         char=${input_string:$i:1}    
 
         if [ "$char" == "-" ]; then
-            if [ "$i" > "0" ]; then
+            if [ "$i" -gt "0"  ]; then
                 char2=${input_string:$i-1:1}   
                 if [ "$char2" == " " ]; then
                     if [ ! -z "$tmp" ]; then
