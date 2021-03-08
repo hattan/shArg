@@ -70,6 +70,17 @@ _processInput(){
     local argType
     local autoExport
 
+    if [[ "$name" == *"="* ]]; then    
+        name=${input_string:0:size}
+        BFS=$IFS
+        IFS='='
+        read -ra arr <<<"$name"
+        IFS=$BFS
+        name=${arr[0]}
+        value=${arr[1]}
+        value=$(echo $value | xargs)
+    fi
+
     _varName=${_SH_SWITCHES[$name]}    
     if [ ! -z "$_varName" ]; then
         argType=${_SH_TYPES[$_varName]}
@@ -82,10 +93,13 @@ _processInput(){
             fi
         else
             local _varValue=""
+
             if [[ "$value" == *","* ]]; then
                 local _listInput=$value
                 local arr
+                BFS=$IFS
                 IFS=, read -a arr <<<"${_listInput}"
+                IFS=$BFS
                 listData="${arr[@]}"
                 _varValue=$listData
                 _SH_ARGUMENTS[$_varName]="$listData"

@@ -57,10 +57,11 @@ Describe 'shArg'
       local expectedValue=$1
       if [ "$IPS" == "$expectedValue" ]; then
         return 0
-      else
+      else        
         return 1
       fi
     }
+    
     It 'should return an array of ips when shArg.val is called'
       When call shArgs.parse -i "10.10.10.1 10.10.10.2"
       Assert assert_val_method "IPS" "10.10.10.1 10.10.10.2"
