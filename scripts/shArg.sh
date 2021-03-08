@@ -43,51 +43,90 @@ shArgs.arg(){
     fi
 }
 
-shArgs.parse(){
+_strindex() { 
+  x="${1%%$2*}"
+  [[ "$x" = "$1" ]] && echo -1 || echo "${#x}"
+}
+
+_processInput(){
+    local input_string=$1
+    local firstChar="${input_string:0:1}"
+    if [ "$firstChar" != "-" ]; then
+      return 0 # not a switch exit
+    fi
+    
+    local size=${#input_string}  
+    local spaceIndex=$(_strindex "$input_string" " ")
+    local name=${input_string:0:spaceIndex}
+    local value=${input_string:spaceIndex+1:size}
+    local valueSize=${#input_string} 
+    value=$(echo $value | xargs)
+    if [ "$spaceIndex" == "-1" ]; then
+        name=$value
+        value=""
+    fi
+    
     local _varName
     local argType
     local autoExport
-    while [[ "$#" -gt 0 ]]
-    do
-        case $1 in
-            *)   
-                _varName=${_SH_SWITCHES[$1]}      
-                
-                if [ ! -z "$_varName" ]; then
-                    argType=${_SH_TYPES[$_varName]}
-                    autoExport=${_SH_AUTOS[$_varName]}
-                    hookFunction=${_SH_HOOK_FUNCTIONS[$_varName]}
-                    if [ "$argType" == "FLAG" ]; then
-                        _SH_ARGUMENTS[$_varName]=true
-                        if [ "$autoExport" == true ]; then
-                            eval "$_varName=true"
-                        fi
-                    else
-                        local _varValue=""
-                        if [[ "$2" == *","* ]]; then
-                            local _listInput=$2
-                            local arr
-                            IFS=, read -a arr <<<"${_listInput}"
-                            listData="${arr[@]}"
-                            _varValue=$listData
-                            _SH_ARGUMENTS[$_varName]="$listData"
-                        else
-                            _varValue=$2                             
-                        fi
-                        _SH_ARGUMENTS[$_varName]=$_varValue
-                        if [ "$autoExport" == true ]; then
-                            eval "$_varName=\"$_varValue\""
-                        fi                                           
-                        shift
-                    fi
-                    if [ ! -z "$hookFunction" ]; then          
-                        eval "$hookFunction \"${_SH_ARGUMENTS[$_varName]}\""                    
-                    fi                    
-                fi      
-        esac
-        shift
-    done
 
+    _varName=${_SH_SWITCHES[$name]}    
+    if [ ! -z "$_varName" ]; then
+        argType=${_SH_TYPES[$_varName]}
+        autoExport=${_SH_AUTOS[$_varName]}
+        hookFunction=${_SH_HOOK_FUNCTIONS[$_varName]}
+        if [ "$argType" == "FLAG" ]; then
+            _SH_ARGUMENTS[$_varName]=true
+            if [ "$autoExport" == true ]; then
+                eval "$_varName=true"
+            fi
+        else
+            local _varValue=""
+            if [[ "$value" == *","* ]]; then
+                local _listInput=$value
+                local arr
+                IFS=, read -a arr <<<"${_listInput}"
+                listData="${arr[@]}"
+                _varValue=$listData
+                _SH_ARGUMENTS[$_varName]="$listData"
+            else
+                _varValue=$value                             
+            fi
+            _SH_ARGUMENTS[$_varName]=$_varValue
+            if [ "$autoExport" == true ]; then
+                eval "$_varName=\"$_varValue\""
+            fi                                           
+            shift
+        fi
+        if [ ! -z "$hookFunction" ]; then          
+            eval "$hookFunction \"${_SH_ARGUMENTS[$_varName]}\""                    
+        fi                    
+    fi    
+}
+
+shArgs.parse(){
+    local input_string=$@
+    local char=""
+    local tmp=""
+
+    for (( i=0; i<${#input_string}; i++ )); do
+        char=${input_string:$i:1}    
+        if [ "$char" == "-" ]; then
+          if [ ! -z "$tmp" ]; then
+            _processInput "$tmp"
+            tmp=""
+          fi
+          if [ "${input_string:$i:2}" == "--" ]; then
+            tmp+="$char"
+            i=$((i+1))
+          fi
+        fi
+        tmp+="$char"
+    done   
+    if [ ! -z "$tmp" ]; then
+        _processInput "$tmp"
+        tmp=""
+    fi     
 }
 
 shArgs.val(){
