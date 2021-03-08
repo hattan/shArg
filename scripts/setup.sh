@@ -7,5 +7,5 @@ if [ ! -d $SH_ARG_BASE ]; then
 fi
 
 if [ ! -f "$SH_ARG_BASE/shArg.sh" ]; then
-    wget --directory-prefix=$SH_ARG_BASE https://raw.githubusercontent.com/hattan/shArg/scripts/shArg.sh 
+    wget --quiet --directory-prefix=$SH_ARG_BASE https://raw.githubusercontent.com/hattan/shArg/main/scripts/shArg.sh
 fi
