@@ -52,16 +52,24 @@ fi
 
 * Parse inputs: ```shArgs.parse $@```
 
- * If arguments are autoexported they will be accessible via global variables.
-*  If not autoexported (default) then you can explicility read the values using either of these mechanisms:
+* If arguments are autoexported they will be accessible via global variables.
 
-    * using shArg.val
+* If not autoexported (default) then you can explicility read the values using either of these mechanisms:
+
+  * using shArg.val
 
       ``` declare message=`shArgs.val "MESSAGE"` ```
       ``` echo $message ```
 
-    * using the _SH_ARGUMENTS array
+  * using the _SH_ARGUMENTS array
       ``` echo "MESSAGE = ${_SH_ARGUMENTS["MESSAGE"]}" ```
+
+* Checkout the [guided walk through](GETTING_STARTED.md) on setting up shArg.
+
+## Simple walk through
+
+Please see the following [guided walk through](GETTING_STARTED.md) on setting up shArg.
+
 
 ## Parameter Types
 
