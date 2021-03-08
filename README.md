@@ -103,7 +103,7 @@ shArg has two main input types; PARAMETER and FLAG.
 * FLAG:
   shArg also supports FLAG, which is a boolean input that does not require a value.
 
-  For example: 
+  For example:
 
   ```shell
   # arg 
@@ -115,10 +115,17 @@ shArg has two main input types; PARAMETER and FLAG.
 
   In this case including --debug when calling the script will set the DEBUG variable to true. Omitting it, sets DEBUG to false. There isn't a need to pass a value after debug.
 
+## Assigning values with equals sign
 
+shArg supports two methods for accepting input for parameters.
 
+* Space separated: -key value  e.g. `-m hello world`
+* Equals separated: -key=value e.g. `-m=hello world`
+
+Both parameter input methods behave in a similar manner and provide the flexibility to use either depending on project requirements. You can even mix and match! e.g. `-m=hello world -u user1`
 
 ## shArgs.arg reference
+
 shArgs.arg is the method used to register commnd line parameters or flags.
 
   ```shArgs.arg "<key> <short name> <long name> <type> <auto export>"```
