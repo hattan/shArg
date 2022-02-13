@@ -107,7 +107,8 @@ _processSplitData() {
 
 _trim() {
     local value=$1
-    echo $value | xargs
+    result=$(echo "$value" | xargs)
+    echo $result
 }
 
 _processLine(){

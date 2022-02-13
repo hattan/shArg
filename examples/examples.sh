@@ -33,7 +33,7 @@ shArgs.arg "FILE" -f --file PARAMETER true
 
 
 # Parse inputs
-shArgs.parse $@
+shArgs.parse "$@"
 
 # assign the value to a variable
 declare message=`shArgs.val "MESSAGE"`

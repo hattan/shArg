@@ -25,6 +25,6 @@ messageHook() {
 shArgs.arg "MESSAGE" -m --message PARAMETER true messageHook
 
 # parse inputs
-shArgs.parse $@
+shArgs.parse "$@"
 
 

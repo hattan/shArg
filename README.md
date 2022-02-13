@@ -18,7 +18,7 @@ shArgs.arg "MESSAGE" -m --message PARAMETER true
 shArgs.arg "DEBUG" -d --debug FLAG true
 
 # parse inputs
-shArgs.parse $@
+shArgs.parse "$@"
 
 echo "The message is $MESSAGE"
 
@@ -50,7 +50,7 @@ fi
 
   example: ```shArgs.arg "MESSAGE" -m --message PARAMETER true```
 
-* Parse inputs: ```shArgs.parse $@```
+* Parse inputs: ```shArgs.parse "$@"```
 
 * If arguments are autoexported they will be accessible via global variables.
 
@@ -181,7 +181,7 @@ orgHook() {
 shArgs.arg "AZURE_DEVOPS_ORG" -o --orgName PARAMETER true orgHook
 
 # parse inputs
-shArgs.parse $@
+shArgs.parse "$@"
 
 
 ```
