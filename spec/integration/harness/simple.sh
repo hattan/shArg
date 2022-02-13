@@ -11,7 +11,7 @@ shArgs.arg "MESSAGE" -m --message PARAMETER true
 shArgs.arg "DEBUG" -d --debug FLAG true
 
 # parse inputs
-shArgs.parse $@
+shArgs.parse "$@"
 
 echo "The message is $MESSAGE"
 

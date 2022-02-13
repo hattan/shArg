@@ -4,7 +4,7 @@ source scripts/shArg.sh
 
 declare IPS
 shArgs.arg "IPS" -i --ips PARAMETER true 
-shArgs.parse $@
+shArgs.parse "$@"
 
 for ip in $IPS
 do

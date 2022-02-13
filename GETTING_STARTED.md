@@ -32,7 +32,7 @@ This guide will walk you through setting up a simple script to use shArg and hig
   shArgs.arg "DEBUG" -d --debug FLAG true
 
   # parse inputs
-  shArgs.parse $@
+  shArgs.parse "$@"
 
   echo "The message is $MESSAGE"
 
