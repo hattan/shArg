@@ -3,6 +3,15 @@
 # shArg
 argument parsing library for .sh files. 
 
+## Dependencies
+
+Bash 4 or greater.
+
+If running on MacOs, please ensure you are using a newer version of bash.
+
+To find the bash version you have installed `bash --version`
+
+To upgrade bash on MacOs `brew install bash`
 
 ## Simple Example:
 
