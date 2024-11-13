@@ -47,9 +47,9 @@ Describe 'shArg'
       The value "${_SH_AUTOS['MESSAGE']}" should equal true
     End
 
-    It 'should set auto export to false, if not specified'
+    It 'should set auto export to true, if not specified'
       When call shArgs.arg "MESSAGE" -m --message FLAG 
-      The value "${_SH_AUTOS['MESSAGE']}" should equal false
+      The value "${_SH_AUTOS['MESSAGE']}" should equal true
     End
 
     It 'should allow only short name to be specified'

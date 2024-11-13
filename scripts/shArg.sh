@@ -32,10 +32,10 @@ shArgs.arg(){
         _SH_ARGUMENTS[$variableName]="" 
     fi
 
-    if [ "$auto" == true ]; then
-        _SH_AUTOS[$variableName]=true
-    else
+    if [ "$auto" == false ]; then
         _SH_AUTOS[$variableName]=false
+    else
+        _SH_AUTOS[$variableName]=true
     fi
 
     if [ ! -z "$hookFunction" ]; then
@@ -88,13 +88,13 @@ _processSplitData() {
     local _varName
     local argType
     local autoExport
-
+    
     _varName=${_SH_SWITCHES[$name]}    
     if [ ! -z "$_varName" ]; then
         argType=${_SH_TYPES[$_varName]}
         autoExport=${_SH_AUTOS[$_varName]}
         hookFunction=${_SH_HOOK_FUNCTIONS[$_varName]}
-        if [ "$argType" == "FLAG" ]; then
+        if [ -z "$value" ]; then
             _processFlag "$_varName" "$autoExport"
         else
             _processParameter "$_varName" "$value" "$autoExport"
@@ -128,7 +128,7 @@ _processLine(){
         name=$value
         value=""
     fi
- 
+
     if [[ "$name" == *"="* ]]; then    
         name=${input_string:0:size}
         BFS=$IFS
@@ -147,7 +147,7 @@ shArgs.parse(){
     local char=""
     local tmp=""
     local previousChar=""
-    
+ 
     for (( i=0; i<${#input_string}; i++ )); do
         char=${input_string:$i:1}    
 

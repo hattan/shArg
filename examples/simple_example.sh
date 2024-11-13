@@ -12,17 +12,24 @@ source ../scripts/shArg.sh
 declare MESSAGE
 declare DEBUG
 
+messageHook() {
+  local message=$1
+
+  echo "message hooked invoked with $message"
+  echo "Global variable is still available $MESSAGE"
+}
+
+
 # register arguments
-shArgs.arg "MESSAGE" -m --message PARAMETER true
-shArgs.arg "DEBUG" -d --debug FLAG true
+shArgs.arg "MESSAGE" -m --message PARAMETER true messageHook
 
 # parse inputs
 shArgs.parse "$@"
 
-echo "The message is $MESSAGE"
+# echo "The message is $MESSAGE"
 
-if [ "$DEBUG" == true ]; then
-  echo "DEBUG is true!"
-else
-  echo "DEBUG is false"
-fi
+# if [ "$DEBUG" == true ]; then
+#   echo "DEBUG is true!"
+# else
+#   echo "DEBUG is false"
+# fi
