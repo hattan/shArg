@@ -61,9 +61,9 @@ fi
 
 * Parse inputs: ```shArgs.parse "$@"```
 
-* If arguments are autoexported they will be accessible via global variables.
+* If arguments are auto exported they will be accessible via global variables.
 
-* If not autoexported (default) then you can explicility read the values using either of these mechanisms:
+* If not auto exported (default) then you can explicitly read the values using either of these mechanisms:
 
   * using shArg.val
 
@@ -110,7 +110,7 @@ shArg has two main input types; PARAMETER and FLAG.
   ./list.sh -i 1.1.1.1,2.2.2.2
   ```
 
-  ***Note:*** For csv inputs, please ensure that there is no space between elements and associated commas. This applies event with quotes inputs.
+  ***Note:*** For csv inputs, please ensure that there is no space between elements and associated commas. This applies even with quoted inputs.
 
   ```shell
   # This will work
@@ -149,24 +149,24 @@ Both parameter input methods behave in a similar manner and provide the flexibil
 
 ## shArgs.arg reference
 
-shArgs.arg is the method used to register commnd line parameters or flags.
+shArgs.arg is the method used to register command line parameters or flags.
 
   ```shArgs.arg "<key> <short name> <long name> <type> <auto export>"```
 
 |parameter| descriptions| example|
-----------|-------------|--------|
-| key | unique name for your variable. Note if auto export is true ,then this is the variable name that will set in the global scope| "MESSAGE"
+|----------|-------------|--------|
+| key | unique name for your variable. Note if auto export is true ,then this is the variable name that will set in the global scope| "MESSAGE"|
 | short name | the short command line flag and should start with one single dash.| -m
 | long name | the long version command line flag and should start with two dashes | --messages
 |type| either PARAMETER (for inputs with values) or FLAG (for boolean inputs which do not require a value) | -d
-|auto export| either true or false . If true, then the key is exported to the global scope as a variable with the input value.| true
+|auto export| either true or false . If true, then the key is exported to the global scope as a variable with the input value.| true|
 |hook method name| Name of a method to invoke when the argument is found (see hooks section below)| "hookMethod"
 
 ## Hook methods
 
-shArg support hook functions, which are bash functions that get invoked when the parse method finds an input that matches an argument. Hook method binding are useful for setting other values or side effects when an input is found.
+shArg supports hook functions, which are bash functions that get invoked when the parse method finds an input that matches an argument. Hook method bindings are useful for setting other values or side effects when an input is found.
 
-examle:
+example:
 
 ```shell
 
