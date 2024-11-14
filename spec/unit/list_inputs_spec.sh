@@ -2,7 +2,7 @@ Describe 'shArg'
   Include scripts/shArg.sh
   Context "csv inputs"
     setup() { 
-      shArgs.arg "IPS" -i --ips PARAMETER true 
+      shArgs.arg "IPS" -i --ips
     }
     BeforeEach 'setup'
 

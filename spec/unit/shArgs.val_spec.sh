@@ -3,11 +3,11 @@ Describe 'shArg'
 
   Context "val helper method"
     setup() { 
-      shArgs.arg "MESSAGE" -m --message PARAMETER  
-      shArgs.arg "DEBUG" -d --debug FLAG            
+      shArgs.arg "MESSAGE" -m --message  
+      shArgs.arg "DEBUG" -d --debug            
       shArgs.arg "USER" -u                          
       shArgs.arg "OUTPUT" --output                  
-      shArgs.arg "FILE" -f --file PARAMETER true    
+      shArgs.arg "FILE" -f --file    
 
       shArgs.parse --message "efghij" -u picard --output json -f input.dat -d
     }

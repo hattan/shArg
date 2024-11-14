@@ -10,12 +10,12 @@ Describe 'shArg'
 
     setup() { 
       # argument registration used by the specs that follow.
-      shArgs.arg "MESSAGE" -m --message PARAMETER       #1
-      shArgs.arg "DEBUG" -d --debug FLAG                #2
-      shArgs.arg "USER" -u                              #3
-      shArgs.arg "OUTPUT" --output                      #4
-      shArgs.arg "FILE" -f --file PARAMETER true        #5
-      shArgs.arg "URL" -l --url PARAMETER true urlHook  #6
+      shArgs.arg "MESSAGE" -m --message  #1
+      shArgs.arg "DEBUG" -d --debug      #2
+      shArgs.arg "USER" -u               #3
+      shArgs.arg "OUTPUT" --output       #4
+      shArgs.arg "FILE" -f --file        #5
+      shArgs.arg "URL" -l --url urlHook  #6
       URL_HOOK_CALLED=false
     }
     BeforeEach 'setup'

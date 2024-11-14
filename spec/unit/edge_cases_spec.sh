@@ -5,7 +5,7 @@ Describe 'shArg'
   Context "Argument Parsing"
     setup() { 
       # argument registration used by the specs that follow.
-      shArgs.arg "RESOURCE_GROUP" -g --resource PARAMETER true
+      shArgs.arg "RESOURCE_GROUP" -g --resource
     }
     BeforeEach 'setup'
 

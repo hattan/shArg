@@ -23,8 +23,8 @@ declare MESSAGE
 declare DEBUG
 
 # register arguments
-shArgs.arg "MESSAGE" -m --message PARAMETER true
-shArgs.arg "DEBUG" -d --debug FLAG true
+shArgs.arg "MESSAGE" -m --message
+shArgs.arg "DEBUG" -d --debug
 
 # parse inputs
 shArgs.parse "$@"
@@ -55,13 +55,13 @@ fi
 * source shArg in your bash script.
   ```source shArg.sh```
 * Register arguments
-  ```shArgs.arg "<key: string>" "<short flag name: -string>" "<long flag name: --string>" "<type: PARAMETER | FLAG>" "<auto export: true | false"```
+  ```shArgs.arg "<key: string>" "<short flag name: -string>" "<long flag name: --string>" "<type: PARAMETER | FLAG>"```
 
-  example: ```shArgs.arg "MESSAGE" -m --message PARAMETER true```
+  example: ```shArgs.arg "MESSAGE" -m --message```
 
 * Parse inputs: ```shArgs.parse "$@"```
 
-* If arguments are auto exported they will be accessible via global variables.
+* By default arguments are auto exported and will be accessible via global variables.
 
 * If not auto exported (default) then you can explicitly read the values using either of these mechanisms:
 
