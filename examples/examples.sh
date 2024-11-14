@@ -5,20 +5,20 @@
 # shARgs.arg "<key: string>" "<short flag name: -string>" "<long flag name: --string>" "<type: PARAMETER | FLAG>" "<auto export: true | false"
 #
 # Run this script with
-# ./examples.sh -f 1234 -b -m 12123 -d aaa --coo bbb
+# ./examples.sh -f 1234 -b -m 12123 -d aaa -n bbb
 # #########################################################
 
 # load shArg
 source ../scripts/shArg.sh
 
 # define a parmeter (input with value)
-shArgs.arg "MESSAGE" -m --message PARAMETER 
+shArgs.arg "MESSAGE" -m --message 
 
 # define a boolean flag (no value required)
-shArgs.arg "DEBUG" -d --debug FLAG
-
-# if omitted PARAMETER is the default
-shArgs.arg "USER" -u --user 
+# if invoked without a value then it's assumed to be a FLAG and will return true/false.
+# eg ./script.sh -m "test" will have a value of "test"
+# eg ./script.sh -d will have a value of true
+shArgs.arg "DEBUG" -d --debug
 
 # you can define an arg with only a short name
 shArgs.arg "NAME" -n
@@ -31,7 +31,6 @@ shArgs.arg "OUTPUT" --output
 declare FILE
 shArgs.arg "FILE" -f --file PARAMETER true 
 
-
 # Parse inputs
 shArgs.parse "$@"
 
@@ -41,9 +40,7 @@ echo "message   = $message"
 
 # Reference values directly from the _SH_ARGUMENTs array
 echo "DEBUG     = ${_SH_ARGUMENTS["DEBUG"]}"
-echo "USER      = ${_SH_ARGUMENTS["USER"]}"
 echo "NAME      = ${_SH_ARGUMENTS["NAME"]}"
-echo "OUTPUT    = ${_SH_ARGUMENTS["OUTPUT"]}"
 
 # auto exported value to Global variable
 echo "FILE      = $FILE"
