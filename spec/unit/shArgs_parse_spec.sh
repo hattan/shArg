@@ -96,6 +96,11 @@ Context "Argument Parsing"
       When call shArgs.parse -rgp "my-test-group"
       The value "$RESOURCE_GROUP" should equal "my-test-group"
     End     
+
+    It 'should display a warning if an unknown flag is passed in'
+      When call shArgs.parse --fake-flag
+        The output should include "@shArg Warning: Unknown argument --fake-flag"
+    End     
   End 
 
   Context "Argument Parsing (Legacy)"

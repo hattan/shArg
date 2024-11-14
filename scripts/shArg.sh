@@ -111,7 +111,9 @@ _processSplitData() {
         fi
         if [ ! -z "$hookFunction" ]; then          
             eval "$hookFunction \"${_SH_ARGUMENTS[$_varName]}\""                    
-        fi                    
+        fi   
+    else
+        _warn "Unknown argument $name"                 
     fi  
 }
 
@@ -127,7 +129,7 @@ _processLine(){
     if [ "$firstChar" != "-" ]; then
       return 0 # not a switch exit
     fi
-    
+   
     local size=${#input_string}  
     local spaceIndex=$(_strindex "$input_string" " ")
     local name=${input_string:0:spaceIndex}
@@ -186,4 +188,11 @@ shArgs.parse(){
 
 shArgs.val(){
    echo ${_SH_ARGUMENTS[$1]}
+}
+
+# display functions
+_warn(){
+    if [ -z "$SHARG_DISABLE_WARNINGS" ]; then
+         echo -e "\033[33m@shArg Warning: $1\033[0m"
+    fi
 }

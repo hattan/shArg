@@ -195,6 +195,12 @@ shArgs.parse "$@"
 
 ```
 
+## Unknown arguments
+
+Passing in an unknown argument will result in a warning that will notify the user that the supplied command line argument is unknown and not handled.
+
+To disable warnings set the following environment variable to true `SHARG_DISABLE_WARNINGS=true`
+
 ## Running the tests
 
 * Install [ShellSpec](https://github.com/shellspec/shellspec#installation)
@@ -202,3 +208,9 @@ shArgs.parse "$@"
   ```curl -fsSL https://git.io/shellspec | sh```
 
 * Run Shellspec using the bash command ```shellspec -f d```
+
+## Environment Variables
+
+* SHARG_DISABLE_WARNINGS = true/false (default)
+
+  Disables all shArg related warnings.
