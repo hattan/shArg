@@ -20,8 +20,18 @@ shArgs.arg(){
         _SH_SWITCHES[$longName]=$variableName
     fi
 
-    if [ ! -z "$argType" ]; then
-        _SH_TYPES[$variableName]=$argType
+    if [ -n "$argType" ]; then
+        isHook=true
+        case $argType in 
+            "PARAMETER"|"FLAG"|"true"|"false")
+                isHook=false ;;        
+        esac
+
+        if [ "$isHook" == "false" ]; then
+            _SH_TYPES[$variableName]=$argType
+        else
+            _SH_HOOK_FUNCTIONS[$variableName]=$argType
+        fi
     else
         _SH_TYPES[$variableName]="PARAMETER"
     fi

@@ -12,7 +12,7 @@ messageHook() {
 }
 
 # register arguments
-shArgs.arg "MESSAGE" -m --message messageHook
+shArgs.arg "MESSAGE" -m --message PARAMETER true messageHook
 
 # parse inputs
 shArgs.parse "$@"
