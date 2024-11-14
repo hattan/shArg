@@ -8,7 +8,7 @@ Describe 'shArg'
       shArgs.arg "USER" -u                          
       shArgs.arg "OUTPUT" --output                  
       shArgs.arg "FILE" -f --file    
-
+      SHARG_DISABLE_WARNINGS=true
       shArgs.parse --message "efghij" -u picard --output json -f input.dat -d
     }
     BeforeEach 'setup'

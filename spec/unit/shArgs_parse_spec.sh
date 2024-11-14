@@ -18,8 +18,11 @@ Context "Argument Parsing"
       shArgs.arg "URL" -l --url urlHook                  #6
       shArgs.arg "NAME" -nm --name                       #7
       shArgs.arg "RESOURCE_GROUP" -rgp --resource-group  #8
+      shArgs.arg "LABEL" --label                         #9
       URL_HOOK_CALLED=false
+      unset "USER"
     }
+
     BeforeEach 'setup'
 
     It 'should parse an argument with short name (#1)'
@@ -100,7 +103,32 @@ Context "Argument Parsing"
     It 'should display a warning if an unknown flag is passed in'
       When call shArgs.parse --fake-flag
         The output should include "@shArg Warning: Unknown argument --fake-flag"
-    End     
+    End    
+
+    label_setup(){
+      export LABEL="hello"
+    }
+    label_cleanup(){
+      unset "LABEL"
+    }
+    Before 'label_setup'
+    It 'should display a warning if an existing variable is overridden'
+      When call shArgs.parse --label "hello" 
+        The output should include "@shArg Warning: autoexported variable \"LABEL\" contains a value and will be overridden by shArg"
+    End  
+    After 'label_cleanup'
+
+    export_setup(){
+      #shArgs.disableAutoExport
+      shArgs.arg "TYPE" --type                         #9
+    }
+    Before 'export_setup'
+    It 'should not auto export variables if shArgs.disableAutoExport is configured'
+      When call shArgs.parse --type "macos" 
+        The value "$TYPE" should not equal ""
+        The value "$TYPE" should equal "macos"
+    End  
+     
   End 
 
   Context "Argument Parsing (Legacy)"
@@ -120,6 +148,8 @@ Context "Argument Parsing"
       shArgs.arg "NAME" -nm --name PARAMETER true                       #7
       shArgs.arg "RESOURCE_GROUP" -rgp --resource-group PARAMETER true  #8
       URL_HOOK_CALLED=false
+      unset "USER"
+      unset "LABEL"
     }
     BeforeEach 'setup_legacy'
 

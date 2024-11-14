@@ -17,6 +17,7 @@ Describe 'shArg'
       shArgs.arg "FILE" -f --file        #5
       shArgs.arg "URL" -l --url urlHook  #6
       URL_HOOK_CALLED=false
+      SHARG_DISABLE_WARNINGS=true
     }
     BeforeEach 'setup'
 

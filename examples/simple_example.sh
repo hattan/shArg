@@ -20,6 +20,7 @@ shArgs.arg "DEBUG" -d --debug
 shArgs.parse "$@"
 
 echo "The message is $MESSAGE"
+echo "The message is $(shArgs.val "MESSAGE")" 
 
 if [ "$DEBUG" == true ]; then
   echo "DEBUG is true!"

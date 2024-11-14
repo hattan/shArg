@@ -5,6 +5,7 @@ declare -A _SH_SWITCHES=()
 declare -A _SH_TYPES=()
 declare -A _SH_AUTOS=()
 declare -A _SH_HOOK_FUNCTIONS=()
+declare AUTO_EXPORTS=true
 shArgs.arg(){   
     local variableName=$1
     local shortName=$2
@@ -88,6 +89,11 @@ _processFlag() {
     _SH_ARGUMENTS[$_varName]=$_varValue
     
     if [ "$autoExport" == true ]; then
+        existing=$(eval "echo \$$_varName")
+        if [ -n "$existing" ]; then
+            _warn "autoexported variable \"$_varName\" contains a value and will be overridden by shArg"
+        fi
+
         eval "$_varName=\"$_varValue\""
     fi                                            
 }
@@ -102,7 +108,7 @@ _processSplitData() {
     _varName=${_SH_SWITCHES[$name]}    
     if [ ! -z "$_varName" ]; then
         argType=${_SH_TYPES[$_varName]}
-        autoExport=${_SH_AUTOS[$_varName]}
+        autoExport="$AUTO_EXPORTS"
         hookFunction=${_SH_HOOK_FUNCTIONS[$_varName]}
         if [ -z "$value" ]; then
             _processFlag "$_varName" "$autoExport"
@@ -195,4 +201,8 @@ _warn(){
     if [ -z "$SHARG_DISABLE_WARNINGS" ]; then
          echo -e "\033[33m@shArg Warning: $1\033[0m"
     fi
+}
+
+shArgs.disableAutoExport(){
+    AUTO_EXPORTS=false
 }
