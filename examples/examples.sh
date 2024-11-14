@@ -35,7 +35,7 @@ shArgs.arg "FILE" -f --file PARAMETER true
 shArgs.parse "$@"
 
 # assign the value to a variable
-declare message=`shArgs.val "MESSAGE"`
+declare message='shArgs.val "MESSAGE"'
 echo "message   = $message"
 
 # Reference values directly from the _SH_ARGUMENTs array
